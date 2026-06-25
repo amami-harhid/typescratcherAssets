@@ -10,6 +10,7 @@ import { Sound } from './sound';
 import { license } from './license';
 import { JsonElement, soundModal } from './elementSoundModal';
 import { imageModal } from './elementImageModal';
+import { version } from './version';
 
 declare global {
   interface Window {
@@ -47,6 +48,7 @@ const css = `
     }
     .pullDown {
         border: none; /*1px solid black;*/    
+        cursor: pointer;
     }
     .radius10 {
         border-radius: 5px;    
@@ -58,6 +60,11 @@ const css = `
     button.license {
         border: none; /*1px solid black;*/
         width: 6rem;
+        cursor: pointer;
+    }
+    span.version {
+        margin-left: 1rem;
+        margin-right: 5px;
     }
     div.header > div {
         margin-left: 10px;
@@ -91,6 +98,7 @@ const css = `
         align-items: center;
         width:150px;
         height:150px;
+        cursor: pointer;
     }
     .fit {
         width: fit-content;
@@ -192,6 +200,9 @@ const css = `
     .responsive-text {
         font-size: clamp(10px, 2.0vw, 20px);
     }
+    .responsive-text2 {
+        font-size: clamp(10px, 1.5vw, 15px);
+    }
     img {
         /* ドラッグでの保存や選択を禁止 */
         -webkit-user-drag: none;
@@ -208,6 +219,7 @@ const css = `
         border-radius: 8px;
         background-color: #4545fa;
         color: white;
+        cursor: pointer;
     }
     .copyButton > img {
         height: 12px;
@@ -218,6 +230,7 @@ const css = `
     }
     span.copy-name {
         font-size:18px;
+        cursor: pointer;
     }
 `;
 
@@ -395,6 +408,7 @@ export class Gui {
         const licenseDiv = document.createElement('div') as HTMLDivElement;
         licenseDiv.classList.add('license');
         header?.appendChild(licenseDiv);
+
         const licenseButton = document.createElement('button') as HTMLButtonElement;
         licenseButton.classList.add('responsive-text');
         licenseButton.classList.add('license');
@@ -406,6 +420,12 @@ export class Gui {
             if(modalOverlay)
                 modalOverlay.style.display = 'flex';
         });
+        
+        const versionSpan = document.createElement('span') as HTMLSpanElement;
+        versionSpan.innerText = version;
+        versionSpan.classList.add('responsive-text2');
+        versionSpan.classList.add('version');
+        licenseDiv.appendChild(versionSpan);
 
 
     }

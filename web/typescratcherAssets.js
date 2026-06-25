@@ -32,8 +32,8 @@ class Aa {
     });
   }
 }
-function aa(I) {
-  return I && I.__esModule && Object.prototype.hasOwnProperty.call(I, "default") ? I.default : I;
+function aa(Q) {
+  return Q && Q.__esModule && Object.prototype.hasOwnProperty.call(Q, "default") ? Q.default : Q;
 }
 var Y = { exports: {} };
 /**
@@ -44,12 +44,12 @@ var Y = { exports: {} };
  */
 var ta = Y.exports, dA;
 function ga() {
-  return dA || (dA = 1, (function(I) {
+  return dA || (dA = 1, (function(Q) {
     (function(e, A) {
-      I.exports ? I.exports = A() : e.StartAudioContext = A();
+      Q.exports ? Q.exports = A() : e.StartAudioContext = A();
     })(ta, function() {
-      var e = function(B, Q) {
-        this._dragged = !1, this._element = B, this._bindedMove = this._moved.bind(this), this._bindedEnd = this._ended.bind(this, Q), B.addEventListener("touchstart", this._bindedEnd), B.addEventListener("touchmove", this._bindedMove), B.addEventListener("touchend", this._bindedEnd), B.addEventListener("mouseup", this._bindedEnd);
+      var e = function(B, I) {
+        this._dragged = !1, this._element = B, this._bindedMove = this._moved.bind(this), this._bindedEnd = this._ended.bind(this, I), B.addEventListener("touchstart", this._bindedEnd), B.addEventListener("touchmove", this._bindedMove), B.addEventListener("touchend", this._bindedEnd), B.addEventListener("mouseup", this._bindedEnd);
       };
       e.prototype._moved = function(B) {
         this._dragged = !0;
@@ -59,40 +59,40 @@ function ga() {
         this._element.removeEventListener("touchstart", this._bindedEnd), this._element.removeEventListener("touchmove", this._bindedMove), this._element.removeEventListener("touchend", this._bindedEnd), this._element.removeEventListener("mouseup", this._bindedEnd), this._bindedMove = null, this._bindedEnd = null, this._element = null;
       };
       function A(B) {
-        var Q = B.createBuffer(1, 1, B.sampleRate), r = B.createBufferSource();
-        r.buffer = Q, r.connect(B.destination), r.start(0), B.resume && B.resume();
+        var I = B.createBuffer(1, 1, B.sampleRate), r = B.createBufferSource();
+        r.buffer = I, r.connect(B.destination), r.start(0), B.resume && B.resume();
       }
       function g(B) {
         return B.state === "running";
       }
-      function a(B, Q) {
+      function a(B, I) {
         function r() {
-          g(B) ? Q() : (requestAnimationFrame(r), B.resume && B.resume());
+          g(B) ? I() : (requestAnimationFrame(r), B.resume && B.resume());
         }
-        g(B) ? Q() : r();
+        g(B) ? I() : r();
       }
-      function t(B, Q, r) {
+      function t(B, I, r) {
         if (Array.isArray(B) || NodeList && B instanceof NodeList)
-          for (var d = 0; d < B.length; d++)
-            t(B[d], Q, r);
+          for (var i = 0; i < B.length; i++)
+            t(B[i], I, r);
         else if (typeof B == "string")
-          t(document.querySelectorAll(B), Q, r);
+          t(document.querySelectorAll(B), I, r);
         else if (B.jquery && typeof B.toArray == "function")
-          t(B.toArray(), Q, r);
+          t(B.toArray(), I, r);
         else if (Element && B instanceof Element) {
           var n = new e(B, r);
-          Q.push(n);
+          I.push(n);
         }
       }
-      function C(B, Q, r) {
-        var d = new Promise(function(u) {
+      function C(B, I, r) {
+        var i = new Promise(function(u) {
           a(B, u);
         }), n = [];
-        return Q || (Q = document.body), t(Q, n, B), d.then(function() {
+        return I || (I = document.body), t(I, n, B), i.then(function() {
           for (var u = 0; u < n.length; u++)
             n[u].dispose();
           n = null, r && r();
-        }), d;
+        }), i;
       }
       return C;
     });
@@ -102,17 +102,17 @@ var P, oA;
 function ea() {
   if (oA) return P;
   oA = 1;
-  const I = ga();
+  const Q = ga();
   return P = function(e) {
     if (typeof document < "u")
-      return I(e);
+      return Q(e);
   }, P;
 }
 var N, hA;
 function Ca() {
   if (hA) return N;
   hA = 1;
-  var I = {};
+  var Q = {};
   return N = function(A) {
     if (typeof window > "u") return null;
     var g = window.OfflineAudioContext || window.webkitOfflineAudioContext, a = window.AudioContext || window.webkitAudioContext;
@@ -121,24 +121,24 @@ function Ca() {
     var t = A && A.sampleRate;
     if (A && A.offline)
       return g ? new g(A.channels || 2, A.length, t || 44100) : null;
-    var C = I[t];
+    var C = Q[t];
     if (C) return C;
     try {
       C = new a(A);
     } catch {
       C = new a();
     }
-    return I[C.sampleRate] = I[t] = C, C;
+    return Q[C.sampleRate] = Q[t] = C, C;
   }, N;
 }
 var J = { exports: {} }, R = { exports: {} }, x, uA;
 function Ba() {
   if (uA) return x;
   uA = 1;
-  function I() {
+  function Q() {
     this._events = {};
   }
-  return I.prototype = {
+  return Q.prototype = {
     on: function(e, A) {
       this._events || (this._events = {});
       var g = this._events;
@@ -172,20 +172,20 @@ function Ba() {
       }
       return a.cb = A, this.on(e, a), this;
     }
-  }, I.mixin = function(e) {
-    var A = I.prototype, g;
+  }, Q.mixin = function(e) {
+    var A = Q.prototype, g;
     for (g in A)
       A.hasOwnProperty(g) && (e.prototype[g] = A[g]);
-  }, x = I, x;
+  }, x = Q, x;
 }
 var O, lA;
 function k() {
   if (lA) return O;
   lA = 1;
-  var I = Ba();
+  var Q = Ba();
   function e() {
   }
-  return I.mixin(e), e.prototype.write = function(A, g, a) {
+  return Q.mixin(e), e.prototype.write = function(A, g, a) {
     this.emit("item", A, g, a);
   }, e.prototype.end = function() {
     this.emit("end"), this.removeAllListeners();
@@ -223,11 +223,11 @@ var K, mA;
 function Ia() {
   if (mA) return K;
   mA = 1;
-  var I = k(), e = { debug: 1, info: 2, warn: 3, error: 4 };
+  var Q = k(), e = { debug: 1, info: 2, warn: 3, error: 4 };
   function A() {
     this.enabled = !0, this.defaultResult = !0, this.clear();
   }
-  I.mixin(A), A.prototype.allow = function(a, t) {
+  Q.mixin(A), A.prototype.allow = function(a, t) {
     return this._white.push({ n: a, l: e[t] }), this;
   }, A.prototype.deny = function(a, t) {
     return this._black.push({ n: a, l: e[t] }), this;
@@ -253,21 +253,21 @@ function Ia() {
 }
 var pA;
 function Qa() {
-  return pA || (pA = 1, (function(I, e) {
+  return pA || (pA = 1, (function(Q, e) {
     var A = k(), g = Ia(), a = new A(), t = Array.prototype.slice;
-    e = I.exports = function(B) {
-      var Q = function() {
-        return a.write(B, void 0, t.call(arguments)), Q;
+    e = Q.exports = function(B) {
+      var I = function() {
+        return a.write(B, void 0, t.call(arguments)), I;
       };
-      return Q.debug = function() {
-        return a.write(B, "debug", t.call(arguments)), Q;
-      }, Q.info = function() {
-        return a.write(B, "info", t.call(arguments)), Q;
-      }, Q.warn = function() {
-        return a.write(B, "warn", t.call(arguments)), Q;
-      }, Q.error = function() {
-        return a.write(B, "error", t.call(arguments)), Q;
-      }, Q.log = Q.debug, Q.suggest = e.suggest, Q.format = a.format, Q;
+      return I.debug = function() {
+        return a.write(B, "debug", t.call(arguments)), I;
+      }, I.info = function() {
+        return a.write(B, "info", t.call(arguments)), I;
+      }, I.warn = function() {
+        return a.write(B, "warn", t.call(arguments)), I;
+      }, I.error = function() {
+        return a.write(B, "error", t.call(arguments)), I;
+      }, I.log = I.debug, I.suggest = e.suggest, I.format = a.format, I;
     }, e.defaultBackend = e.defaultFormatter = null, e.pipe = function(C) {
       return a.pipe(C);
     }, e.end = e.unpipe = e.disable = function(C) {
@@ -281,7 +281,7 @@ var X, fA;
 function jA() {
   if (fA) return X;
   fA = 1;
-  var I = {
+  var Q = {
     black: "#000",
     red: "#c23621",
     green: "#25bc26",
@@ -293,7 +293,7 @@ function jA() {
     purple: "#708"
   };
   function e(A, g) {
-    return g ? "color: #fff; background: " + I[A] + ";" : "color: " + I[A] + ";";
+    return g ? "color: #fff; background: " + Q[A] + ";" : "color: " + Q[A] + ";";
   }
   return X = e, X;
 }
@@ -301,7 +301,7 @@ var j, FA;
 function Ea() {
   if (FA) return j;
   FA = 1;
-  var I = k(), e = jA(), A = { debug: ["cyan"], info: ["purple"], warn: ["yellow", !0], error: ["red", !0] }, g = new I();
+  var Q = k(), e = jA(), A = { debug: ["cyan"], info: ["purple"], warn: ["yellow", !0], error: ["red", !0] }, g = new Q();
   return g.write = function(a, t, C) {
     var B = console.log;
     console[t] && console[t].apply && (B = console[t], B.apply(console, ["%c" + a + " %c" + t, e("gray"), e.apply(e, A[t])].concat(C)));
@@ -312,15 +312,15 @@ var V, bA;
 function sa() {
   if (bA) return V;
   bA = 1;
-  var I = k(), e = jA(), A = { debug: ["gray"], info: ["purple"], warn: ["yellow", !0], error: ["red", !0] }, g = new I();
+  var Q = k(), e = jA(), A = { debug: ["gray"], info: ["purple"], warn: ["yellow", !0], error: ["red", !0] }, g = new Q();
   return g.write = function(a, t, C) {
     var B = console.log;
     t != "debug" && console[t] && (B = console[t]);
-    var Q = 0;
+    var I = 0;
     if (t != "info") {
-      for (; Q < C.length && typeof C[Q] == "string"; Q++)
+      for (; I < C.length && typeof C[I] == "string"; I++)
         ;
-      B.apply(console, ["%c" + a + " " + C.slice(0, Q).join(" "), e.apply(e, A[t])].concat(C.slice(Q)));
+      B.apply(console, ["%c" + a + " " + C.slice(0, I).join(" "), e.apply(e, A[t])].concat(C.slice(I)));
     } else
       B.apply(console, ["%c" + a, e.apply(e, A[t])].concat(C));
   }, g.pipe = function() {
@@ -330,7 +330,7 @@ var W, wA;
 function ca() {
   if (wA) return W;
   wA = 1;
-  var I = k(), e = /\n+$/, A = new I();
+  var Q = k(), e = /\n+$/, A = new Q();
   return A.write = function(g, a, t) {
     var C = t.length - 1;
     if (!(typeof console > "u" || !console.log)) {
@@ -352,7 +352,7 @@ var q, vA;
 function ra() {
   if (vA) return q;
   vA = 1;
-  var I = k(), e = [], A = new I();
+  var Q = k(), e = [], A = new Q();
   return A.write = function(g, a, t) {
     e.push([g, a, t]);
   }, A.get = function() {
@@ -365,7 +365,7 @@ var z, SA;
 function na() {
   if (SA) return z;
   SA = 1;
-  var I = k(), e = !1, A = new I();
+  var Q = k(), e = !1, A = new Q();
   return A.write = function(g, a, t) {
     if (!(typeof window > "u" || typeof JSON > "u" || !JSON.stringify || !JSON.parse))
       try {
@@ -378,11 +378,11 @@ var Z, DA;
 function ia() {
   if (DA) return Z;
   DA = 1;
-  var I = k(), e = (/* @__PURE__ */ new Date()).valueOf().toString(36);
+  var Q = k(), e = (/* @__PURE__ */ new Date()).valueOf().toString(36);
   function A(g) {
     this.url = g.url || "", this.cache = [], this.timer = null, this.interval = g.interval || 30 * 1e3, this.enabled = !0, this.jQuery = window.jQuery, this.extras = {};
   }
-  return I.mixin(A), A.prototype.write = function(g, a, t) {
+  return Q.mixin(A), A.prototype.write = function(g, a, t) {
     this.timer || this.init(), this.cache.push([g, a].concat(t));
   }, A.prototype.init = function() {
     if (!(!this.enabled || !this.jQuery)) {
@@ -402,8 +402,8 @@ function ia() {
           data: C,
           contentType: "application/json",
           timeout: 1e4
-        }).success(function(Q, r, d) {
-          Q.interval && (g.interval = Math.max(1e3, Q.interval));
+        }).success(function(I, r, i) {
+          I.interval && (g.interval = Math.max(1e3, I.interval));
         }).error(function() {
           g.interval = 3e4;
         }).always(function() {
@@ -422,7 +422,7 @@ function ia() {
 }
 var kA;
 function da() {
-  return kA || (kA = 1, (function(I, e) {
+  return kA || (kA = 1, (function(Q, e) {
     var A = Qa(), g = A.enable, a = A.disable, t = typeof navigator < "u" && /chrome/i.test(navigator.userAgent), C = ca();
     if (A.defaultBackend = t ? C.minilog : C, typeof window < "u") {
       try {
@@ -448,7 +448,7 @@ function da() {
       } catch {
       }
       return this;
-    }, e = I.exports = A, e.backends = {
+    }, e = Q.exports = A, e.backends = {
       array: ra(),
       browser: A.defaultBackend,
       localStorage: na(),
@@ -460,18 +460,18 @@ var _, yA;
 function H() {
   if (yA) return _;
   yA = 1;
-  const I = da();
-  return I.enable(), _ = I("scratch-audioengine"), _;
+  const Q = da();
+  return Q.enable(), _ = Q("scratch-audioengine"), _;
 }
 var $, LA;
 function oa() {
   if (LA) return $;
   LA = 1;
-  const I = "!#%()*+,-./:;=?@[]^_`{|}~ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const Q = "!#%()*+,-./:;=?@[]^_`{|}~ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   return $ = function() {
-    const g = I.length, a = [];
+    const g = Q.length, a = [];
     for (let t = 0; t < 20; t++)
-      a[t] = I.charAt(Math.random() * g);
+      a[t] = Q.charAt(Math.random() * g);
     return a.join("");
   }, $;
 }
@@ -479,7 +479,7 @@ var AA, MA;
 function ha() {
   if (MA) return AA;
   MA = 1;
-  class I {
+  class Q {
     /**
      * ArrayBufferStream wraps the built-in javascript ArrayBuffer, adding the ability to access
      * data in it like a stream, tracking its position.
@@ -507,7 +507,7 @@ function ha() {
      * @return {ArrayBufferStream} the extracted stream
      */
     extract(A) {
-      return new I(this.arrayBuffer, this._position, this._position + A, this);
+      return new Q(this.arrayBuffer, this._position, this._position + A, this);
     }
     /**
      * @return {number} the length of the stream in bytes
@@ -594,13 +594,13 @@ function ha() {
       return this._position += 4, A;
     }
   }
-  return AA = I, AA;
+  return AA = Q, AA;
 }
 var aA, JA;
 function ua() {
   if (JA) return aA;
   JA = 1;
-  const I = ha(), e = H(), A = [
+  const Q = ha(), e = H(), A = [
     7,
     8,
     9,
@@ -711,12 +711,12 @@ function ua() {
   let a = null;
   const t = function() {
     if (a === null) {
-      const B = A.length, Q = g.length;
-      a = new Array(B * Q).fill(0);
+      const B = A.length, I = g.length;
+      a = new Array(B * I).fill(0);
       let r = 0;
-      for (let d = 0; d < B; d++)
-        for (let n = 0; n < Q; n++) {
-          const u = A[d];
+      for (let i = 0; i < B; i++)
+        for (let n = 0; n < I; n++) {
+          const u = A[i];
           let p = 0;
           n & 4 && (p += u), n & 2 && (p += u >> 1), n & 1 && (p += u >> 2), p += u >> 3, a[r++] = n & 8 ? -p : p;
         }
@@ -728,8 +728,8 @@ function ua() {
      * @param {AudioContext} audioContext - a webAudio context
      * @constructor
      */
-    constructor(Q) {
-      this.audioContext = Q;
+    constructor(I) {
+      this.audioContext = I;
     }
     /**
      * Data used by the decompression algorithm
@@ -751,12 +751,12 @@ function ua() {
      * @param  {ArrayBuffer} audioData - containing ADPCM encoded wav audio
      * @return {Promise.<AudioBuffer>} the decoded audio buffer
      */
-    decode(Q) {
-      return new Promise((r, d) => {
-        const n = new I(Q);
-        n.readUint8String(4) !== "RIFF" && (e.warn("incorrect adpcm wav header"), d(new Error("incorrect adpcm wav header")));
+    decode(I) {
+      return new Promise((r, i) => {
+        const n = new Q(I);
+        n.readUint8String(4) !== "RIFF" && (e.warn("incorrect adpcm wav header"), i(new Error("incorrect adpcm wav header")));
         const p = n.readInt32();
-        p + 8 !== Q.byteLength && e.warn(`adpcm wav length in header: ${p} is incorrect`), n.readUint8String(4) !== "WAVE" && (e.warn("incorrect adpcm wav header"), d(new Error("incorrect adpcm wav header")));
+        p + 8 !== I.byteLength && e.warn(`adpcm wav length in header: ${p} is incorrect`), n.readUint8String(4) !== "WAVE" && (e.warn("incorrect adpcm wav header"), i(new Error("incorrect adpcm wav header")));
         const l = this.extractChunk("fmt ", n);
         this.encoding = l.readUint16(), this.channels = l.readUint16(), this.samplesPerSecond = l.readUint32(), this.bytesPerSecond = l.readUint32(), this.blockAlignment = l.readUint16(), this.bitsPerSample = l.readUint16(), l.position += 2, this.samplesPerBlock = l.readUint16(), this.adpcmBlockSize = (this.samplesPerBlock - 1) / 2 + 4;
         const F = this.extractChunk("data", n), w = this.numberOfSamples(F, this.adpcmBlockSize), S = this.audioContext.createBuffer(1, w, this.samplesPerSecond);
@@ -769,10 +769,10 @@ function ua() {
      * @param  {ArrayBufferStream} stream - an stream containing the audio data
      * @return {ArrayBufferStream} a stream containing the desired chunk
      */
-    extractChunk(Q, r) {
+    extractChunk(I, r) {
       for (r.position = 12; r.position < r.getLength() - 8; ) {
-        const d = r.readUint8String(4), n = r.readInt32();
-        if (d === Q)
+        const i = r.readUint8String(4), n = r.readInt32();
+        if (i === I)
           return r.extract(n);
         r.position += n;
       }
@@ -783,10 +783,10 @@ function ua() {
      * @param {number} blockSize - size of each block in the data in bytes
      * @return {number} number of samples in the compressed data
      */
-    numberOfSamples(Q, r) {
-      if (!Q) return 0;
-      Q.position = 0;
-      const d = Q.getBytesAvailable(), u = (d / r | 0) * (2 * (r - 4)) + 1, p = Math.max(d % r - 4, 0) * 2, h = Math.min(d % r, 1);
+    numberOfSamples(I, r) {
+      if (!I) return 0;
+      I.position = 0;
+      const i = I.getBytesAvailable(), u = (i / r | 0) * (2 * (r - 4)) + 1, p = Math.max(i % r - 4, 0) * 2, h = Math.min(i % r, 1);
       return u + p + h;
     }
     /**
@@ -796,17 +796,17 @@ function ua() {
      * @param  {number} blockSize - the number of bytes in the stream
      * @param  {Float32Array} out - the uncompressed audio samples
      */
-    imaDecompress(Q, r, d) {
+    imaDecompress(I, r, i) {
       let n, u, p, h = 0, l = -1;
-      if (!Q) return;
-      Q.position = 0;
-      const F = d.length, w = (r - 4) * 2, S = t();
+      if (!I) return;
+      I.position = 0;
+      const F = i.length, w = (r - 4) * 2, S = t();
       let v = 0;
       for (; v < F; ) {
-        n = Q.readInt16(), h = Q.readUint8(), Q.position++, h > 88 && (h = 88), d[v++] = n / 32768;
+        n = I.readInt16(), h = I.readUint8(), I.position++, h > 88 && (h = 88), i[v++] = n / 32768;
         const s = Math.min(w, F - v), E = v;
         for (; v - E < s; )
-          l = Q.readUint8(), u = l & 15, p = S[h * 16 + u], h += g[u], h > 88 ? h = 88 : h < 0 && (h = 0), n += p, n > 32767 ? n = 32767 : n < -32768 && (n = -32768), d[v++] = n / 32768, u = l >> 4 & 15, p = S[h * 16 + u], h += g[u], h > 88 ? h = 88 : h < 0 && (h = 0), n += p, n > 32767 ? n = 32767 : n < -32768 && (n = -32768), d[v++] = n / 32768;
+          l = I.readUint8(), u = l & 15, p = S[h * 16 + u], h += g[u], h > 88 ? h = 88 : h < 0 && (h = 0), n += p, n > 32767 ? n = 32767 : n < -32768 && (n = -32768), i[v++] = n / 32768, u = l >> 4 & 15, p = S[h * 16 + u], h += g[u], h > 88 ? h = 88 : h < 0 && (h = 0), n += p, n > 32767 ? n = 32767 : n < -32768 && (n = -32768), i[v++] = n / 32768;
       }
     }
   }
@@ -816,7 +816,7 @@ var tA, RA;
 function la() {
   if (RA) return tA;
   RA = 1;
-  const I = H();
+  const Q = H();
   class e {
     /**
      * Instrument and detect a loudness value from a local microphone.
@@ -837,7 +837,7 @@ function la() {
       if (!this.mic && !this.connectingToMic && (this.connectingToMic = !0, navigator.mediaDevices.getUserMedia({ audio: !0 }).then((g) => {
         this.audioStream = g, this.mic = this.audioContext.createMediaStreamSource(g), this.analyser = this.audioContext.createAnalyser(), this.mic.connect(this.analyser), this.micDataArray = new Float32Array(this.analyser.fftSize);
       }).catch((g) => {
-        I.warn(g);
+        Q.warn(g);
       })), this.mic && this.audioStream.active) {
         this.analyser.getFloatTimeDomainData(this.micDataArray);
         let g = 0;
@@ -855,10 +855,10 @@ var U = { exports: {} }, UA;
 function ma() {
   if (UA) return U.exports;
   UA = 1;
-  var I = typeof Reflect == "object" ? Reflect : null, e = I && typeof I.apply == "function" ? I.apply : function(E, c, i) {
-    return Function.prototype.apply.call(E, c, i);
+  var Q = typeof Reflect == "object" ? Reflect : null, e = Q && typeof Q.apply == "function" ? Q.apply : function(E, c, d) {
+    return Function.prototype.apply.call(E, c, d);
   }, A;
-  I && typeof I.ownKeys == "function" ? A = I.ownKeys : Object.getOwnPropertySymbols ? A = function(E) {
+  Q && typeof Q.ownKeys == "function" ? A = Q.ownKeys : Object.getOwnPropertySymbols ? A = function(E) {
     return Object.getOwnPropertyNames(E).concat(Object.getOwnPropertySymbols(E));
   } : A = function(E) {
     return Object.getOwnPropertyNames(E);
@@ -895,13 +895,13 @@ function ma() {
       throw new RangeError('The value of "n" is out of range. It must be a non-negative number. Received ' + E + ".");
     return this._maxListeners = E, this;
   };
-  function Q(s) {
+  function I(s) {
     return s._maxListeners === void 0 ? t.defaultMaxListeners : s._maxListeners;
   }
   t.prototype.getMaxListeners = function() {
-    return Q(this);
+    return I(this);
   }, t.prototype.emit = function(E) {
-    for (var c = [], i = 1; i < arguments.length; i++) c.push(arguments[i]);
+    for (var c = [], d = 1; d < arguments.length; d++) c.push(arguments[d]);
     var o = E === "error", f = this._events;
     if (f !== void 0)
       o = o && f.error === void 0;
@@ -920,11 +920,11 @@ function ma() {
     if (typeof M == "function")
       e(M, this, c);
     else
-      for (var iA = M.length, WA = h(M, iA), i = 0; i < iA; ++i)
-        e(WA[i], this, c);
+      for (var iA = M.length, WA = h(M, iA), d = 0; d < iA; ++d)
+        e(WA[d], this, c);
     return !0;
   };
-  function r(s, E, c, i) {
+  function r(s, E, c, d) {
     var o, f, m;
     if (B(c), f = s._events, f === void 0 ? (f = s._events = /* @__PURE__ */ Object.create(null), s._eventsCount = 0) : (f.newListener !== void 0 && (s.emit(
       "newListener",
@@ -932,7 +932,7 @@ function ma() {
       c.listener ? c.listener : c
     ), f = s._events), m = f[E]), m === void 0)
       m = f[E] = c, ++s._eventsCount;
-    else if (typeof m == "function" ? m = f[E] = i ? [c, m] : [m, c] : i ? m.unshift(c) : m.push(c), o = Q(s), o > 0 && m.length > o && !m.warned) {
+    else if (typeof m == "function" ? m = f[E] = d ? [c, m] : [m, c] : d ? m.unshift(c) : m.push(c), o = I(s), o > 0 && m.length > o && !m.warned) {
       m.warned = !0;
       var D = new Error("Possible EventEmitter memory leak detected. " + m.length + " " + String(E) + " listeners added. Use emitter.setMaxListeners() to increase limit");
       D.name = "MaxListenersExceededWarning", D.emitter = s, D.type = E, D.count = m.length, g(D);
@@ -944,50 +944,50 @@ function ma() {
   }, t.prototype.on = t.prototype.addListener, t.prototype.prependListener = function(E, c) {
     return r(this, E, c, !0);
   };
-  function d() {
+  function i() {
     if (!this.fired)
       return this.target.removeListener(this.type, this.wrapFn), this.fired = !0, arguments.length === 0 ? this.listener.call(this.target) : this.listener.apply(this.target, arguments);
   }
   function n(s, E, c) {
-    var i = { fired: !1, wrapFn: void 0, target: s, type: E, listener: c }, o = d.bind(i);
-    return o.listener = c, i.wrapFn = o, o;
+    var d = { fired: !1, wrapFn: void 0, target: s, type: E, listener: c }, o = i.bind(d);
+    return o.listener = c, d.wrapFn = o, o;
   }
   t.prototype.once = function(E, c) {
     return B(c), this.on(E, n(this, E, c)), this;
   }, t.prototype.prependOnceListener = function(E, c) {
     return B(c), this.prependListener(E, n(this, E, c)), this;
   }, t.prototype.removeListener = function(E, c) {
-    var i, o, f, m, D;
+    var d, o, f, m, D;
     if (B(c), o = this._events, o === void 0)
       return this;
-    if (i = o[E], i === void 0)
+    if (d = o[E], d === void 0)
       return this;
-    if (i === c || i.listener === c)
-      --this._eventsCount === 0 ? this._events = /* @__PURE__ */ Object.create(null) : (delete o[E], o.removeListener && this.emit("removeListener", E, i.listener || c));
-    else if (typeof i != "function") {
-      for (f = -1, m = i.length - 1; m >= 0; m--)
-        if (i[m] === c || i[m].listener === c) {
-          D = i[m].listener, f = m;
+    if (d === c || d.listener === c)
+      --this._eventsCount === 0 ? this._events = /* @__PURE__ */ Object.create(null) : (delete o[E], o.removeListener && this.emit("removeListener", E, d.listener || c));
+    else if (typeof d != "function") {
+      for (f = -1, m = d.length - 1; m >= 0; m--)
+        if (d[m] === c || d[m].listener === c) {
+          D = d[m].listener, f = m;
           break;
         }
       if (f < 0)
         return this;
-      f === 0 ? i.shift() : l(i, f), i.length === 1 && (o[E] = i[0]), o.removeListener !== void 0 && this.emit("removeListener", E, D || c);
+      f === 0 ? d.shift() : l(d, f), d.length === 1 && (o[E] = d[0]), o.removeListener !== void 0 && this.emit("removeListener", E, D || c);
     }
     return this;
   }, t.prototype.off = t.prototype.removeListener, t.prototype.removeAllListeners = function(E) {
-    var c, i, o;
-    if (i = this._events, i === void 0)
+    var c, d, o;
+    if (d = this._events, d === void 0)
       return this;
-    if (i.removeListener === void 0)
-      return arguments.length === 0 ? (this._events = /* @__PURE__ */ Object.create(null), this._eventsCount = 0) : i[E] !== void 0 && (--this._eventsCount === 0 ? this._events = /* @__PURE__ */ Object.create(null) : delete i[E]), this;
+    if (d.removeListener === void 0)
+      return arguments.length === 0 ? (this._events = /* @__PURE__ */ Object.create(null), this._eventsCount = 0) : d[E] !== void 0 && (--this._eventsCount === 0 ? this._events = /* @__PURE__ */ Object.create(null) : delete d[E]), this;
     if (arguments.length === 0) {
-      var f = Object.keys(i), m;
+      var f = Object.keys(d), m;
       for (o = 0; o < f.length; ++o)
         m = f[o], m !== "removeListener" && this.removeAllListeners(m);
       return this.removeAllListeners("removeListener"), this._events = /* @__PURE__ */ Object.create(null), this._eventsCount = 0, this;
     }
-    if (c = i[E], typeof c == "function")
+    if (c = d[E], typeof c == "function")
       this.removeListener(E, c);
     else if (c !== void 0)
       for (o = c.length - 1; o >= 0; o--)
@@ -995,10 +995,10 @@ function ma() {
     return this;
   };
   function u(s, E, c) {
-    var i = s._events;
-    if (i === void 0)
+    var d = s._events;
+    if (d === void 0)
       return [];
-    var o = i[E];
+    var o = d[E];
     return o === void 0 ? [] : typeof o == "function" ? c ? [o.listener || o] : [o] : c ? F(o) : h(o, o.length);
   }
   t.prototype.listeners = function(E) {
@@ -1023,8 +1023,8 @@ function ma() {
     return this._eventsCount > 0 ? A(this._events) : [];
   };
   function h(s, E) {
-    for (var c = new Array(E), i = 0; i < E; ++i)
-      c[i] = s[i];
+    for (var c = new Array(E), d = 0; d < E; ++d)
+      c[d] = s[d];
     return c;
   }
   function l(s, E) {
@@ -1038,9 +1038,9 @@ function ma() {
     return E;
   }
   function w(s, E) {
-    return new Promise(function(c, i) {
+    return new Promise(function(c, d) {
       function o(m) {
-        s.removeListener(E, f), i(m);
+        s.removeListener(E, f), d(m);
       }
       function f() {
         typeof s.removeListener == "function" && s.removeListener("error", o), c([].slice.call(arguments));
@@ -1051,12 +1051,12 @@ function ma() {
   function S(s, E, c) {
     typeof s.on == "function" && v(s, "error", E, c);
   }
-  function v(s, E, c, i) {
+  function v(s, E, c, d) {
     if (typeof s.on == "function")
-      i.once ? s.once(E, c) : s.on(E, c);
+      d.once ? s.once(E, c) : s.on(E, c);
     else if (typeof s.addEventListener == "function")
       s.addEventListener(E, function o(f) {
-        i.once && s.removeEventListener(E, o), c(f);
+        d.once && s.removeEventListener(E, o), c(f);
       });
     else
       throw new TypeError('The "emitter" argument must be of type EventEmitter. Received type ' + typeof s);
@@ -1067,7 +1067,7 @@ var gA, YA;
 function nA() {
   if (YA) return gA;
   YA = 1;
-  class I {
+  class Q {
     /**
       * @param {AudioEngine} audioEngine - audio engine this runs with
       * @param {AudioPlayer} audioPlayer - audio player this affects
@@ -1166,14 +1166,14 @@ function nA() {
       this.inputNode = null, this.outputNode = null, this.target = null, this.initialized = !1;
     }
   }
-  return gA = I, gA;
+  return gA = Q, gA;
 }
-var eA, GA;
+var eA, TA;
 function VA() {
-  if (GA) return eA;
-  GA = 1;
-  const I = nA();
-  class e extends I {
+  if (TA) return eA;
+  TA = 1;
+  const Q = nA();
+  class e extends Q {
     /**
      * Default value to set the Effect to when constructed and when clear'ed.
      * @const {number}
@@ -1216,12 +1216,12 @@ function VA() {
   }
   return eA = e, eA;
 }
-var CA, TA;
+var CA, GA;
 function pa() {
-  if (TA) return CA;
-  TA = 1;
-  const { EventEmitter: I } = ma(), e = VA(), A = "ended";
-  class g extends I {
+  if (GA) return CA;
+  GA = 1;
+  const { EventEmitter: Q } = ma(), e = VA(), A = "ended";
+  class g extends Q {
     /**
      * Play sounds that stop without audible clipping.
      *
@@ -1355,7 +1355,7 @@ var BA, HA;
 function fa() {
   if (HA) return BA;
   HA = 1;
-  class I {
+  class Q {
     /**
      * Chain of effects that can be applied to a group of SoundPlayers.
      * @param {AudioEngine} audioEngine - engine whose effects these belong to
@@ -1374,7 +1374,7 @@ function fa() {
      * @returns {EffectChain} a clone of this EffectChain
      */
     clone() {
-      const A = new I(this.audioEngine, this.effects);
+      const A = new Q(this.audioEngine, this.effects);
       return this.target && A.connect(this.target), A;
     }
     /**
@@ -1456,14 +1456,14 @@ function fa() {
       this._soundPlayers = null, this._effects.forEach((A) => A.dispose()), this._effects = null;
     }
   }
-  return BA = I, BA;
+  return BA = Q, BA;
 }
 var IA, PA;
 function Fa() {
   if (PA) return IA;
   PA = 1;
-  const I = nA();
-  class e extends I {
+  const Q = nA();
+  class e extends Q {
     /**
      * @param {AudioEngine} audioEngine - audio engine this runs with
      * @param {AudioPlayer} audioPlayer - audio player this affects
@@ -1496,8 +1496,8 @@ function Fa() {
      */
     _set(g) {
       this.value = g;
-      const a = (g + 100) / 200, t = Math.cos(a * Math.PI / 2), C = Math.sin(a * Math.PI / 2), { currentTime: B, DECAY_WAIT: Q, DECAY_DURATION: r } = this.audioEngine;
-      this.leftGain.gain.setTargetAtTime(t, B + Q, r), this.rightGain.gain.setTargetAtTime(C, B + Q, r);
+      const a = (g + 100) / 200, t = Math.cos(a * Math.PI / 2), C = Math.sin(a * Math.PI / 2), { currentTime: B, DECAY_WAIT: I, DECAY_DURATION: r } = this.audioEngine;
+      this.leftGain.gain.setTargetAtTime(t, B + I, r), this.rightGain.gain.setTargetAtTime(C, B + I, r);
     }
     /**
      * Clean up and disconnect audio nodes.
@@ -1512,8 +1512,8 @@ var QA, NA;
 function ba() {
   if (NA) return QA;
   NA = 1;
-  const I = nA();
-  class e extends I {
+  const Q = nA();
+  class e extends Q {
     /**
      * @param {AudioEngine} audioEngine - audio engine this runs with
      * @param {AudioPlayer} audioPlayer - audio player this affects
@@ -1603,7 +1603,7 @@ var EA, xA;
 function wa() {
   if (xA) return EA;
   xA = 1;
-  const I = H(), e = "*";
+  const Q = H(), e = "*";
   class A {
     /**
      * A bank of sounds that can be played.
@@ -1628,7 +1628,7 @@ function wa() {
      * @returns {SoundPlayer} instance of sound player for the id
      */
     getSoundPlayer(a) {
-      return this.soundPlayers[a] || I.error(`SoundBank.getSoundPlayer(${a}): called missing sound in bank`), this.soundPlayers[a];
+      return this.soundPlayers[a] || Q.error(`SoundBank.getSoundPlayer(${a}): called missing sound in bank`), this.soundPlayers[a];
     }
     /**
      * Get a sound EffectChain by id.
@@ -1691,7 +1691,7 @@ var sA, OA;
 function va() {
   if (OA) return sA;
   OA = 1;
-  const I = ea(), e = Ca(), A = H(), g = oa(), a = ua(), t = la(), C = pa(), B = fa(), Q = Fa(), r = ba(), d = VA(), n = wa(), u = function(h, l) {
+  const Q = ea(), e = Ca(), A = H(), g = oa(), a = ua(), t = la(), C = pa(), B = fa(), I = Fa(), r = ba(), i = VA(), n = wa(), u = function(h, l) {
     return h.decodeAudioData.length === 1 ? h.decodeAudioData(l) : new Promise((F, w) => {
       h.decodeAudioData(
         l,
@@ -1702,7 +1702,7 @@ function va() {
   };
   class p {
     constructor(l = new e()) {
-      this.audioContext = l, I(this.audioContext), this.inputNode = this.audioContext.createGain(), this.inputNode.connect(this.audioContext.destination), this.audioBuffers = {}, this.loudness = null, this.effects = [Q, r, d];
+      this.audioContext = l, Q(this.audioContext), this.inputNode = this.audioContext.createGain(), this.inputNode.connect(this.audioContext.destination), this.audioBuffers = {}, this.loudness = null, this.effects = [I, r, i];
     }
     /**
      * Current time in the AudioEngine.
@@ -1914,7 +1914,7 @@ class L {
     this._soundPlayer.stop();
   }
 }
-const La = (I) => {
+const La = (Q) => {
   const e = [
     { title: "", text: "A web application for browsing and accessing images and sounds from the Scratch editor asset library.<br/>Scratchエディタで使用されている画像・音素材をブラウズできるWebアプリです。" },
     { title: "1.⚠️ Disclaimer (免責事項)", text: "This project is <b>NOT affiliated with, endorsed by, or officially connected to the Scratch Foundation</b>.<br/>本プロジェクトは<b>Scratch Foundationとは一切関係ありません(非公式)</b>。<br/>提携・承認・公式プロジェクトではありません。" },
@@ -1942,10 +1942,10 @@ const La = (I) => {
   for (const A of e) {
     if (A.title) {
       const a = document.createElement("h2");
-      a.innerHTML = A.title, I.appendChild(a);
+      a.innerHTML = A.title, Q.appendChild(a);
     }
     const g = document.createElement("p");
-    g.innerHTML = A.text, I.appendChild(g);
+    g.innerHTML = A.text, Q.appendChild(g);
   }
 }, Ma = `
   #toast-container {
@@ -1990,23 +1990,23 @@ class y {
     Ja(e, A);
   }
 }
-const Ja = (I, e = 3e3) => {
+const Ja = (Q, e = 3e3) => {
   let A = document.querySelector("#toast-container");
   A == null && (A = document.createElement("div"), A.id = "toast-container", document.querySelector("body")?.appendChild(A));
   const g = document.createElement("div");
-  g.className = "toast", g.textContent = I, A?.appendChild(g), requestAnimationFrame(() => g.classList.add("show")), setTimeout(() => {
+  g.className = "toast", g.textContent = Q, A?.appendChild(g), requestAnimationFrame(() => g.classList.add("show")), setTimeout(() => {
     g.classList.remove("show"), setTimeout(() => {
       g.remove();
     }, 300);
   }, e);
-}, G = async (I) => {
+}, T = async (Q) => {
   const e = y.getInstance();
   try {
-    console.log(I), await navigator.clipboard.writeText(I), e.show(`Copied. ${I}`);
+    console.log(Q), await navigator.clipboard.writeText(Q), e.show(`Copied. ${Q}`);
   } catch {
     e.show("コピー失敗");
   }
-}, T = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMjBweCIgaGVpZ2h0PSIyMHB4IiB2aWV3Qm94PSIwIDAgMjAgMjAiIHZlcnNpb249IjEuMSI+CjxnIGlkPSJzdXJmYWNlMSI+CjxwYXRoIHN0eWxlPSIgc3Ryb2tlOm5vbmU7ZmlsbC1ydWxlOm5vbnplcm87ZmlsbDpyZ2IoMTAwJSwxMDAlLDEwMCUpO2ZpbGwtb3BhY2l0eToxOyIgZD0iTSAxNy41IDYuMjUgTCAxNy41IDE3LjUgTCA2LjI1IDE3LjUgTCA2LjI1IDYuMjUgTCAxNy41IDYuMjUgTSAxNy41IDUgTCA2LjI1IDUgQyA1LjU2MjUgNSA1IDUuNTYyNSA1IDYuMjUgTCA1IDE3LjUgQyA1IDE4LjE4NzUgNS41NjI1IDE4Ljc1IDYuMjUgMTguNzUgTCAxNy41IDE4Ljc1IEMgMTguMTg3NSAxOC43NSAxOC43NSAxOC4xODc1IDE4Ljc1IDE3LjUgTCAxOC43NSA2LjI1IEMgMTguNzUgNS41NjI1IDE4LjE4NzUgNSAxNy41IDUgWiBNIDE3LjUgNSAiLz4KPHBhdGggc3R5bGU9IiBzdHJva2U6bm9uZTtmaWxsLXJ1bGU6bm9uemVybztmaWxsOnJnYigxMDAlLDEwMCUsMTAwJSk7ZmlsbC1vcGFjaXR5OjE7IiBkPSJNIDIuNSAxMS4yNSBMIDEuMjUgMTEuMjUgTCAxLjI1IDIuNSBDIDEuMjUgMS44MTI1IDEuODEyNSAxLjI1IDIuNSAxLjI1IEwgMTEuMjUgMS4yNSBMIDExLjI1IDIuNSBMIDIuNSAyLjUgWiBNIDIuNSAxMS4yNSAiLz4KPC9nPgo8L3N2Zz4K", Ra = 70, Ua = (I, e) => {
+}, G = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMjBweCIgaGVpZ2h0PSIyMHB4IiB2aWV3Qm94PSIwIDAgMjAgMjAiIHZlcnNpb249IjEuMSI+CjxnIGlkPSJzdXJmYWNlMSI+CjxwYXRoIHN0eWxlPSIgc3Ryb2tlOm5vbmU7ZmlsbC1ydWxlOm5vbnplcm87ZmlsbDpyZ2IoMTAwJSwxMDAlLDEwMCUpO2ZpbGwtb3BhY2l0eToxOyIgZD0iTSAxNy41IDYuMjUgTCAxNy41IDE3LjUgTCA2LjI1IDE3LjUgTCA2LjI1IDYuMjUgTCAxNy41IDYuMjUgTSAxNy41IDUgTCA2LjI1IDUgQyA1LjU2MjUgNSA1IDUuNTYyNSA1IDYuMjUgTCA1IDE3LjUgQyA1IDE4LjE4NzUgNS41NjI1IDE4Ljc1IDYuMjUgMTguNzUgTCAxNy41IDE4Ljc1IEMgMTguMTg3NSAxOC43NSAxOC43NSAxOC4xODc1IDE4Ljc1IDE3LjUgTCAxOC43NSA2LjI1IEMgMTguNzUgNS41NjI1IDE4LjE4NzUgNSAxNy41IDUgWiBNIDE3LjUgNSAiLz4KPHBhdGggc3R5bGU9IiBzdHJva2U6bm9uZTtmaWxsLXJ1bGU6bm9uemVybztmaWxsOnJnYigxMDAlLDEwMCUsMTAwJSk7ZmlsbC1vcGFjaXR5OjE7IiBkPSJNIDIuNSAxMS4yNSBMIDEuMjUgMTEuMjUgTCAxLjI1IDIuNSBDIDEuMjUgMS44MTI1IDEuODEyNSAxLjI1IDIuNSAxLjI1IEwgMTEuMjUgMS4yNSBMIDExLjI1IDIuNSBMIDIuNSAyLjUgWiBNIDIuNSAxMS4yNSAiLz4KPC9nPgo8L3N2Zz4K", Ra = 70, Ua = (Q, e) => {
   const A = document.querySelector("#modalOverlayElem"), g = A.querySelector("#modalContentInnerElem"), a = document.createElement("div");
   a.classList.add("modalImageDiv"), g.appendChild(a);
   const t = document.createElement("div");
@@ -2015,23 +2015,23 @@ const Ja = (I, e = 3e3) => {
   C.classList.add("modalImageInfoDiv"), g.appendChild(C);
   const B = document.createElement("div");
   B.style = "font-size:1.2rem;text-align:left;";
-  const Q = document.createElement("button");
-  B.appendChild(Q), Q.classList.add("copyButton");
+  const I = document.createElement("button");
+  B.appendChild(I), I.classList.add("copyButton");
   const r = document.createElement("img");
-  r.src = T, Q.appendChild(r), Q.innerHTML += "<span>Copy Name</s>";
-  const d = document.createElement("span");
-  d.classList.add("copy-name"), d.innerText = `${I.name}`, B.appendChild(d), C.appendChild(B), C.classList.add("copyButtonInfo"), B.addEventListener("click", () => {
-    G(I.name);
+  r.src = G, I.appendChild(r), I.innerHTML += "<span>Copy Name</s>";
+  const i = document.createElement("span");
+  i.classList.add("copy-name"), i.innerText = `${Q.name}`, B.appendChild(i), C.appendChild(B), C.classList.add("copyButtonInfo"), B.addEventListener("click", () => {
+    T(Q.name);
   });
   const n = document.createElement("div");
   n.style = "margin-top:10px;";
   const u = document.createElement("button");
   n.appendChild(u), u.classList.add("copyButton");
   const p = document.createElement("img");
-  p.src = T, u.appendChild(p), u.innerHTML += "<span>Copy URL</s>";
+  p.src = G, u.appendChild(p), u.innerHTML += "<span>Copy URL</s>";
   const h = document.createElement("span");
-  h.innerText = `${I.url.slice(0, Ra)}.....`, n.appendChild(h), C.appendChild(n), n.addEventListener("click", () => {
-    G(I.url);
+  h.innerText = `${Q.url.slice(0, Ra)}.....`, n.appendChild(h), C.appendChild(n), n.addEventListener("click", () => {
+    T(Q.url);
   });
   const l = document.createElement("img");
   l.classList.add("soundImage"), l.setAttribute("oncontextmenu", "return false;"), l.src = XA, l.setAttribute("height", "150px"), t.appendChild(l);
@@ -2043,7 +2043,7 @@ const Ja = (I, e = 3e3) => {
   }), F.addEventListener("mouseleave", () => {
     e.stop();
   }), A && (A.style.display = "flex");
-}, Ya = 70, Ga = (I) => {
+}, Ya = 70, Ta = (Q) => {
   const e = document.querySelector("#modalOverlayElem"), A = e.querySelector("#modalContentInnerElem"), g = document.createElement("div");
   g.classList.add("modalImageDiv"), A.appendChild(g);
   const a = document.createElement("div");
@@ -2054,27 +2054,29 @@ const Ja = (I, e = 3e3) => {
   C.style = "font-size:1.2rem;text-align:left;";
   const B = document.createElement("button");
   C.appendChild(B), B.classList.add("copyButton");
-  const Q = document.createElement("img");
-  Q.src = T, B.appendChild(Q), B.innerHTML += "<span>Copy Name</s>";
+  const I = document.createElement("img");
+  I.src = G, B.appendChild(I), B.innerHTML += "<span>Copy Name</s>";
   const r = document.createElement("span");
-  r.classList.add("copy-name"), r.innerText = `${I.name}`, C.appendChild(r), t.appendChild(C), t.classList.add("copyButtonInfo"), C.addEventListener("click", () => {
-    G(I.name);
+  r.classList.add("copy-name"), r.innerText = `${Q.name}`, C.appendChild(r), t.appendChild(C), t.classList.add("copyButtonInfo"), C.addEventListener("click", () => {
+    T(Q.name);
   });
-  const d = document.createElement("div");
-  d.style = "margin-top:10px;";
+  const i = document.createElement("div");
+  i.style = "margin-top:10px;";
   const n = document.createElement("button");
-  d.appendChild(n), n.classList.add("copyButton");
+  i.appendChild(n), n.classList.add("copyButton");
   const u = document.createElement("img");
-  u.src = T, n.appendChild(u), n.innerHTML += "<span>Copy URL&nbsp;</s>";
+  u.src = G, n.appendChild(u), n.innerHTML += "<span>Copy URL&nbsp;</s>";
   const p = document.createElement("span");
-  p.innerText = `${I.url.slice(0, Ya)}.....`, d.appendChild(p), t.appendChild(d), d.addEventListener("click", () => {
-    G(I.url);
-  }), t.appendChild(d);
+  p.innerText = `${Q.url.slice(0, Ya)}.....`, i.appendChild(p), t.appendChild(i), i.addEventListener("click", () => {
+    T(Q.url);
+  }), t.appendChild(i);
   const h = document.createElement("img");
   h.setAttribute("oncontextmenu", "return false;"), h.onload = () => {
     h.width < h.height ? h.setAttribute("height", "150px") : h.setAttribute("width", "150px");
-  }, h.src = I.url, a.appendChild(h), e && (e.style.display = "flex");
-}, Ta = "Scratch3 アセット一覧", Ha = "説明", Pa = `
+  }, h.src = Q.url, a.appendChild(h), e && (e.style.display = "flex");
+}, Ga = "0.1.1", Ha = {
+  version: Ga
+}, Pa = Ha.version, Na = "Scratch3 アセット一覧", xa = "説明", Oa = `
     html, body {
         height: 100%;
         overflow: hidden;
@@ -2103,6 +2105,7 @@ const Ja = (I, e = 3e3) => {
     }
     .pullDown {
         border: none; /*1px solid black;*/    
+        cursor: pointer;
     }
     .radius10 {
         border-radius: 5px;    
@@ -2114,6 +2117,11 @@ const Ja = (I, e = 3e3) => {
     button.license {
         border: none; /*1px solid black;*/
         width: 6rem;
+        cursor: pointer;
+    }
+    span.version {
+        margin-left: 1rem;
+        margin-right: 5px;
     }
     div.header > div {
         margin-left: 10px;
@@ -2147,6 +2155,7 @@ const Ja = (I, e = 3e3) => {
         align-items: center;
         width:150px;
         height:150px;
+        cursor: pointer;
     }
     .fit {
         width: fit-content;
@@ -2248,6 +2257,9 @@ const Ja = (I, e = 3e3) => {
     .responsive-text {
         font-size: clamp(10px, 2.0vw, 20px);
     }
+    .responsive-text2 {
+        font-size: clamp(10px, 1.5vw, 15px);
+    }
     img {
         /* ドラッグでの保存や選択を禁止 */
         -webkit-user-drag: none;
@@ -2264,6 +2276,7 @@ const Ja = (I, e = 3e3) => {
         border-radius: 8px;
         background-color: #4545fa;
         color: white;
+        cursor: pointer;
     }
     .copyButton > img {
         height: 12px;
@@ -2274,6 +2287,7 @@ const Ja = (I, e = 3e3) => {
     }
     span.copy-name {
         font-size:18px;
+        cursor: pointer;
     }
 `;
 class b {
@@ -2304,7 +2318,7 @@ class b {
   }
   static createLayout() {
     const e = document.createElement("style");
-    e.innerHTML = Pa, document.getElementsByTagName("head")[0].appendChild(e);
+    e.innerHTML = Oa, document.getElementsByTagName("head")[0].appendChild(e);
     const g = document.querySelector("body"), a = document.createElement("div");
     a.id = "header", a.classList.add("header"), a.classList.add("border"), g?.appendChild(a), b.addHeaderControl();
     const t = document.createElement("div");
@@ -2313,22 +2327,22 @@ class b {
     if (C.classList.add("container_inner"), C.classList.add("fit"), C.id = "containerInner", t.appendChild(C), g) {
       const B = document.createElement("div");
       g.appendChild(B), B.id = "modalOverlay";
-      const Q = document.createElement("div");
-      B.appendChild(Q), Q.id = "modalContent";
+      const I = document.createElement("div");
+      B.appendChild(I), I.id = "modalContent";
       const r = document.createElement("div");
-      Q.appendChild(r), r.innerHTML = "<h1>このWEBアプリに関するお知らせ</h1>", B.addEventListener("click", (n) => {
+      I.appendChild(r), r.innerHTML = "<h1>このWEBアプリに関するお知らせ</h1>", B.addEventListener("click", (n) => {
         n.target === B && (B.style.display = "none");
       });
-      const d = document.createElement("div");
-      d.id = "modalContentInner", Q.appendChild(d), La(d);
+      const i = document.createElement("div");
+      i.id = "modalContentInner", I.appendChild(i), La(i);
     }
     if (g) {
       const B = document.createElement("div");
       g.appendChild(B), B.id = "modalOverlayElem";
-      const Q = document.createElement("div");
-      B.appendChild(Q), Q.id = "modalContentElem";
+      const I = document.createElement("div");
+      B.appendChild(I), I.id = "modalContentElem";
       const r = document.createElement("div");
-      Q.appendChild(r), r.innerHTML = "<h1>アセット情報</h1>", B.addEventListener("click", (n) => {
+      I.appendChild(r), r.innerHTML = "<h1>アセット情報</h1>", B.addEventListener("click", (n) => {
         if (n.target === B) {
           B.style.display = "none";
           const u = document.querySelector("#modalContentInnerElem");
@@ -2338,46 +2352,48 @@ class b {
           });
         }
       });
-      const d = document.createElement("div");
-      d.id = "modalContentInnerElem", Q.appendChild(d);
+      const i = document.createElement("div");
+      i.id = "modalContentInnerElem", I.appendChild(i);
     }
   }
   static addHeaderControl() {
     const e = document.querySelector("#header"), A = document.createElement("p");
-    A.innerHTML = `<p style="margin-left:10px;" class="responsive-text">${Ta}</p>`, e?.appendChild(A);
+    A.innerHTML = `<p style="margin-left:10px;" class="responsive-text">${Na}</p>`, e?.appendChild(A);
     const g = document.createElement("div");
     e?.appendChild(g), g.classList.add("typeDiv");
     const a = document.createElement("select");
-    a.classList.add("responsive-text"), a.classList.add("pullDown"), a.classList.add("radius10"), a.id = "typePull", a.addEventListener("change", (B) => {
-      if (B.currentTarget) {
-        const Q = document.querySelector("#containerInner");
-        Q?.querySelectorAll("div").forEach((d) => {
-          const n = d.parentElement;
-          n && n.id == "containerInner" && Q.removeChild(d);
+    a.classList.add("responsive-text"), a.classList.add("pullDown"), a.classList.add("radius10"), a.id = "typePull", a.addEventListener("change", (I) => {
+      if (I.currentTarget) {
+        const r = document.querySelector("#containerInner");
+        r?.querySelectorAll("div").forEach((n) => {
+          const u = n.parentElement;
+          u && u.id == "containerInner" && r.removeChild(n);
         });
-        const r = B.currentTarget.value;
-        r == "01" ? b.viewCostumes() : r == "02" ? b.viewBackdrops() : r == "03" && b.viewAudios(), b.lazyLoad();
+        const i = I.currentTarget.value;
+        i == "01" ? b.viewCostumes() : i == "02" ? b.viewBackdrops() : i == "03" && b.viewAudios(), b.lazyLoad();
       }
     }), g.appendChild(a);
     {
-      const B = document.createElement("option");
-      B.value = "01", B.text = "コスチューム", a.appendChild(B);
+      const I = document.createElement("option");
+      I.value = "01", I.text = "コスチューム", a.appendChild(I);
     }
     {
-      const B = document.createElement("option");
-      B.value = "02", B.text = "背景", a.appendChild(B);
+      const I = document.createElement("option");
+      I.value = "02", I.text = "背景", a.appendChild(I);
     }
     {
-      const B = document.createElement("option");
-      B.value = "03", B.text = "音", a.appendChild(B);
+      const I = document.createElement("option");
+      I.value = "03", I.text = "音", a.appendChild(I);
     }
     const t = document.createElement("div");
     t.classList.add("license"), e?.appendChild(t);
     const C = document.createElement("button");
-    C.classList.add("responsive-text"), C.classList.add("license"), C.classList.add("radius10"), C.innerText = `${Ha}`, t.appendChild(C), C.addEventListener("click", () => {
-      const B = document.querySelector("#modalOverlay");
-      B && (B.style.display = "flex");
+    C.classList.add("responsive-text"), C.classList.add("license"), C.classList.add("radius10"), C.innerText = `${xa}`, t.appendChild(C), C.addEventListener("click", () => {
+      const I = document.querySelector("#modalOverlay");
+      I && (I.style.display = "flex");
     });
+    const B = document.createElement("span");
+    B.innerText = Pa, B.classList.add("responsive-text2"), B.classList.add("version"), t.appendChild(B);
   }
   static lazyLoad() {
     b.unLazyLoad();
@@ -2412,7 +2428,7 @@ class b {
     t.setAttribute("oncontextmenu", "return false;"), t.classList.add("thumbnail"), t.src = $A, t.setAttribute("data-src", e.url), t.setAttribute("height", "100px"), a.appendChild(t);
     const C = document.createElement("p");
     g.appendChild(C), C.classList.add("elem-name"), C.innerText = e.name, a.addEventListener("click", () => {
-      Ga(e);
+      Ta(e);
     });
   }
   static viewBackdrops() {
@@ -2438,8 +2454,8 @@ class b {
     }), C.addEventListener("mouseleave", () => {
       B.src = rA, r.stop();
     });
-    const Q = document.createElement("p");
-    g.appendChild(Q), Q.classList.add("elem-name"), Q.innerText = e.name;
+    const I = document.createElement("p");
+    g.appendChild(I), I.classList.add("elem-name"), I.innerText = e.name;
     const r = new L(e.url);
     await r.makeSoundPlayer(), a.addEventListener("click", () => {
       Ua(e, r);
