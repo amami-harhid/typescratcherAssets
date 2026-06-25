@@ -2074,7 +2074,7 @@ const Ja = (Q, e = 3e3) => {
   h.setAttribute("oncontextmenu", "return false;"), h.onload = () => {
     h.width < h.height ? h.setAttribute("height", "150px") : h.setAttribute("width", "150px");
   }, h.src = Q.url, a.appendChild(h), e && (e.style.display = "flex");
-}, Ga = "0.1.1", Ha = {
+}, Ga = "0.1.2", Ha = {
   version: Ga
 }, Pa = Ha.version, Na = "Scratch3 アセット一覧", xa = "説明", Oa = `
     html, body {
@@ -2462,6 +2462,13 @@ class b {
     });
   }
 }
+const Ka = () => {
+  window.addEventListener("load", function() {
+    const Q = document.querySelector("#loading-overlay");
+    Q && (Q.style.display = "none");
+  });
+};
+Ka();
 b.createLayout();
 b.viewFirst();
 b.lazyLoad();
