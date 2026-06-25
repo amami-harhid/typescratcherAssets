@@ -19,6 +19,7 @@ declare global {
 }
 const TITLE = 'Scratch3 アセット一覧';
 const APP = '説明';
+const PagingNumber = 50;
 const css = `
     html, body {
         height: 100%;
@@ -45,6 +46,7 @@ const css = `
         display: flex;
         padding-left:clamp(1vw, 2vw, 2vw);
         align-items: center;
+        margin-left: 1rem;
     }
     .pullDown {
         border: none; /*1px solid black;*/    
@@ -362,7 +364,7 @@ export class Gui {
         typePullDiv.classList.add('typeDiv');
         //typePullDiv.classList.add('fit');
         const typePull = document.createElement('select') as HTMLSelectElement;
-        typePull.classList.add('responsive-text');
+        typePull.classList.add('responsive-text2');
         typePull.classList.add('pullDown');
         typePull.classList.add('radius10');
         typePull.id = 'typePull';
@@ -374,12 +376,16 @@ export class Gui {
                     if(parent && parent.id == 'containerInner')
                         containerInner.removeChild(div);
                 });
+                Gui.unLazyLoad();
                 const changeVal = (event.currentTarget as HTMLOptionElement).value;
-                if(changeVal == '01'){
-                    Gui.viewCostumes();                
-                }else if(changeVal == '02'){
+                if(changeVal == '1'){
+                    Gui.viewCostumesPullOption();
+                    Gui.viewCostumes();        
+                }else if(changeVal == '2'){
+                    Gui.viewBackdropsPullOption();
                     Gui.viewBackdrops();
-                }else if(changeVal == '03'){
+                }else if(changeVal == '3'){
+                    Gui.viewAudiosPullOption();
                     Gui.viewAudios();
                 }
                 Gui.lazyLoad();
@@ -388,22 +394,55 @@ export class Gui {
         typePullDiv.appendChild(typePull);
         {
             const option = document.createElement('option') as HTMLOptionElement;
-            option.value = '01';
+            option.value = '1';
             option.text = 'コスチューム';
             typePull.appendChild(option);            
         }
         {
             const option = document.createElement('option') as HTMLOptionElement;
-            option.value = '02';
+            option.value = '2';
             option.text = '背景';
             typePull.appendChild(option);            
         }
         {
             const option = document.createElement('option') as HTMLOptionElement;
-            option.value = '03';
+            option.value = '3';
             option.text = '音';
             typePull.appendChild(option);            
         }
+        const pagingPullDiv = document.createElement('div');
+        header?.appendChild(pagingPullDiv);
+        pagingPullDiv.classList.add('typeDiv');
+        const pagingPull = document.createElement('select') as HTMLSelectElement;
+        pagingPullDiv.appendChild(pagingPull);
+        pagingPull.classList.add('responsive-text2');
+        pagingPull.classList.add('pullDown');
+        pagingPull.classList.add('radius10');
+        pagingPull.id = 'pagingPull';
+        {
+            const option = document.createElement('option') as HTMLOptionElement;
+            option.value= '1';
+            option.text = '0001-';
+            pagingPull.appendChild(option);
+        }
+        pagingPull.selectedIndex = 0;
+        pagingPullDiv.appendChild(pagingPull);
+        pagingPull.addEventListener('change', (event: Event)=>{
+            const changeVal = (event.currentTarget as HTMLOptionElement).value;
+            const _no = changeVal;
+            const _idx = parseInt(_no);
+            const _type = Gui.getTypeCounter();
+            Gui.unLazyLoad();
+            if(_type == 0){
+                Gui.viewCostumes(_idx);
+            }else if(_type == 1) {
+                Gui.viewBackdrops(_idx);
+            }else if(_type == 2) {
+                Gui.viewAudios(_idx);
+            }
+            Gui.lazyLoad();
+        });
+
 
         const licenseDiv = document.createElement('div') as HTMLDivElement;
         licenseDiv.classList.add('license');
@@ -429,6 +468,14 @@ export class Gui {
 
 
     }
+    static getTypeCounter(): number {
+        const pagingPull = document.querySelector('#typePull') as HTMLSelectElement;
+        return pagingPull.selectedIndex;
+    }
+    static getPagingStartCounter(): number {
+        const pagingPull = document.querySelector('#pagingPull') as HTMLSelectElement;
+        return pagingPull.selectedIndex;
+    }
     static lazyLoad(): void {
         Gui.unLazyLoad();
         const lazyImages = document.querySelectorAll('.lazy-load');
@@ -449,6 +496,7 @@ export class Gui {
     static viewFirst(): void {
         const typePull = document.querySelector('#typePull') as HTMLSelectElement;
         typePull.selectedIndex = 0; // Coustume;
+        Gui.setPullOption(costumesJson);
         Gui.viewCostumes();
 
     }
@@ -456,9 +504,44 @@ export class Gui {
         Gui.viewCostumes();
         Gui.viewBackdrops();   
     }
-    static viewCostumes(): void {
+    static viewCostumesPullOption(): void {
+        Gui.setPullOption(costumesJson);
+    }
+    static viewBackdropsPullOption(): void {
+        Gui.setPullOption(backdropsJson);
+    }
+    static viewAudiosPullOption(): void {
+        Gui.setPullOption(soundsJson);
+    }
+    static setPullOption(jsons: JsonElement[]): void {
+        const pagingPull = document.querySelector('#pagingPull') as HTMLSelectElement;
+        pagingPull.innerHTML = pagingPull.options[0].outerHTML;
+        const length = jsons.length;
+        const counter = Math.floor(length / PagingNumber) + 1;
+        for(let idx=0; idx < counter; idx++){
+            if(idx ==0) continue;
+            const option = document.createElement('option') as HTMLOptionElement;
+            option.value = `${idx*PagingNumber}`
+            option.text = `${idx*PagingNumber}`.padStart(4, '0')+'-';
+            pagingPull.appendChild(option);
+        }
+    }
+
+    static viewCostumes(counter: number = 1): void {
+        const containerInner = document.querySelector('#containerInner');
+        containerInner?.querySelectorAll('div').forEach(div=>{
+            const parent = div.parentElement;
+            if(parent && parent.id == 'containerInner')
+                containerInner.removeChild(div);
+        });
+        const start = (counter < PagingNumber)? 0: counter-1;
+        const end = (counter < PagingNumber)? PagingNumber+1 : counter + PagingNumber; 
+        let _counter = 0;
         for(const element of costumesJson) {
-            Gui.addImageElement(element);
+            if( start < _counter && _counter < end){
+                Gui.addImageElement(element);
+            }
+            _counter += 1;
         }
     }
     static addImageElement(imageElement:JsonElement): void {
@@ -487,14 +570,38 @@ export class Gui {
             imageModal(imageElement);
         })
     }
-    static viewBackdrops(): void {
+    static viewBackdrops(counter: number = 1): void {
+        const containerInner = document.querySelector('#containerInner');
+        containerInner?.querySelectorAll('div').forEach(div=>{
+            const parent = div.parentElement;
+            if(parent && parent.id == 'containerInner')
+                containerInner.removeChild(div);
+        });
+        const start = (counter < PagingNumber)? 0: counter-1;
+        const end = (counter < PagingNumber)? PagingNumber+1 : counter + PagingNumber; 
+        let _counter = 0;
         for(const element of backdropsJson) {
-            Gui.addImageElement(element);
+            if( start < _counter && _counter < end){
+                Gui.addImageElement(element);
+            }
+            _counter += 1;
         }
     }
-    static async viewAudios(): Promise<void> {
+    static async viewAudios(counter: number = 1): Promise<void> {
+        const containerInner = document.querySelector('#containerInner');
+        containerInner?.querySelectorAll('div').forEach(div=>{
+            const parent = div.parentElement;
+            if(parent && parent.id == 'containerInner')
+                containerInner.removeChild(div);
+        });
+        const start = (counter < PagingNumber)? 0: counter-1;
+        const end = (counter < PagingNumber)? PagingNumber+1 : counter + PagingNumber; 
+        let _counter = 0;
         for(const element of soundsJson) {
-            await Gui.addSound(element);
+            if( start < _counter && _counter < end){
+                Gui.addSound(element);
+            }
+            _counter += 1;
         }
         
     }
