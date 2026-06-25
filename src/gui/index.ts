@@ -534,8 +534,8 @@ export class Gui {
             if(parent && parent.id == 'containerInner')
                 containerInner.removeChild(div);
         });
-        const start = (counter < PagingNumber)? 0: counter-1;
-        const end = (counter < PagingNumber)? PagingNumber+1 : counter + PagingNumber; 
+        const start = (counter < PagingNumber)? -1: counter-1;
+        const end = (counter < PagingNumber)? PagingNumber : counter + PagingNumber; 
         let _counter = 0;
         for(const element of costumesJson) {
             if( start < _counter && _counter < end){
@@ -577,8 +577,8 @@ export class Gui {
             if(parent && parent.id == 'containerInner')
                 containerInner.removeChild(div);
         });
-        const start = (counter < PagingNumber)? 0: counter-1;
-        const end = (counter < PagingNumber)? PagingNumber+1 : counter + PagingNumber; 
+        const start = (counter < PagingNumber)? -1: counter-1;
+        const end = (counter < PagingNumber)? PagingNumber : counter + PagingNumber; 
         let _counter = 0;
         for(const element of backdropsJson) {
             if( start < _counter && _counter < end){
@@ -594,8 +594,8 @@ export class Gui {
             if(parent && parent.id == 'containerInner')
                 containerInner.removeChild(div);
         });
-        const start = (counter < PagingNumber)? 0: counter-1;
-        const end = (counter < PagingNumber)? PagingNumber+1 : counter + PagingNumber; 
+        const start = (counter < PagingNumber)? -1: counter-1;
+        const end = (counter < PagingNumber)? PagingNumber : counter + PagingNumber; 
         let _counter = 0;
         for(const element of soundsJson) {
             if( start < _counter && _counter < end){

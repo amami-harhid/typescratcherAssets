@@ -2074,7 +2074,7 @@ const Ra = (I, e = 3e3) => {
   o.setAttribute("oncontextmenu", "return false;"), o.onload = () => {
     o.width < o.height ? o.setAttribute("height", "150px") : o.setAttribute("width", "150px");
   }, o.src = I.url, t.appendChild(o), e && (e.style.display = "flex");
-}, Ha = "0.1.4", Pa = {
+}, Ha = "0.1.5", Pa = {
   version: Ha
 }, Na = Pa.version, xa = "Scratch3 アセット一覧", Oa = "説明", S = 50, Ka = `
     html, body {
@@ -2459,7 +2459,7 @@ class f {
       const B = C.parentElement;
       B && B.id == "containerInner" && A.removeChild(C);
     });
-    const g = e < S ? 0 : e - 1, t = e < S ? S + 1 : e + S;
+    const g = e < S ? -1 : e - 1, t = e < S ? S : e + S;
     let a = 0;
     for (const C of N)
       g < a && a < t && f.addImageElement(C), a += 1;
@@ -2482,7 +2482,7 @@ class f {
       const B = C.parentElement;
       B && B.id == "containerInner" && A.removeChild(C);
     });
-    const g = e < S ? 0 : e - 1, t = e < S ? S + 1 : e + S;
+    const g = e < S ? -1 : e - 1, t = e < S ? S : e + S;
     let a = 0;
     for (const C of uA)
       g < a && a < t && f.addImageElement(C), a += 1;
@@ -2493,7 +2493,7 @@ class f {
       const B = C.parentElement;
       B && B.id == "containerInner" && A.removeChild(C);
     });
-    const g = e < S ? 0 : e - 1, t = e < S ? S + 1 : e + S;
+    const g = e < S ? -1 : e - 1, t = e < S ? S : e + S;
     let a = 0;
     for (const C of hA)
       g < a && a < t && f.addSound(C), a += 1;
