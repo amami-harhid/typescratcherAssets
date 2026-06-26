@@ -20,6 +20,11 @@ declare global {
 const TITLE = 'Scratch3 アセット一覧';
 const APP = '説明';
 const PagingNumber = 50;
+const HeaderCostumeId = 'headerCostume';
+const HeaderBackdropId = 'headerBackdrop';
+const HeaderSoundId = 'headerSound';
+const TypePullId = 'typePull';
+const PagingPullId = 'pagingPull';
 const css = `
     html, body {
         height: 100%;
@@ -67,6 +72,9 @@ const css = `
     span.version {
         margin-left: 1rem;
         margin-right: 5px;
+    }
+    div.hedderHidden {
+        display: none;
     }
     div.header > div {
         margin-left: 10px;
@@ -287,12 +295,32 @@ export class Gui {
         head[0].appendChild(style);
         
         const body = document.querySelector('body');
-        const header = document.createElement('div');
-        header.id = 'header';
-        header.classList.add('header');
-        header.classList.add('border');
-        body?.appendChild(header);
-        Gui.addHeaderControl();
+        {
+            const header = document.createElement('div');
+            header.id = HeaderCostumeId;
+            header.classList.add('header');
+            header.classList.add('border');
+            body?.appendChild(header);
+            Gui.addCostumeHeaderControl();
+        }
+        {
+            const header = document.createElement('div');
+            header.id = HeaderBackdropId;
+            header.classList.add('header');
+            header.classList.add('border');
+            body?.appendChild(header);
+            Gui.addBackdropHeaderControl();
+            Gui.showBackdropHeaderControl(false);
+        }
+        {
+            const header = document.createElement('div');
+            header.id = HeaderSoundId;
+            header.classList.add('header');
+            header.classList.add('border');
+            body?.appendChild(header);
+            Gui.addSoundHeaderControl();
+            Gui.showSoundHeaderControl(false);
+        }
         
         const container = document.createElement('div');
         container.classList.add('container');
@@ -354,20 +382,31 @@ export class Gui {
         }
 
     }
-    static addHeaderControl(): void {
-        const header = document.querySelector('#header');
+    static showCostumeHeaderControl(show: boolean): void {
+        const header = document.querySelector(`#${HeaderCostumeId}`);
+        const typePull = header?.querySelector(`.${TypePullId}`) as HTMLSelectElement;
+        typePull.selectedIndex = 0;
+        if(show === true){
+            header?.classList.remove('hedderHidden');
+        }else{
+            header?.classList.add('hedderHidden');
+        }
+    }
+    static addCostumeHeaderControl(): void {
+        const header = document.querySelector(`#${HeaderCostumeId}`);
         const pageTitle = document.createElement('p') as HTMLParagraphElement;
         pageTitle.innerHTML = `<p style="margin-left:10px;" class="responsive-text">${TITLE}</p>`;
         header?.appendChild(pageTitle);
         const typePullDiv = document.createElement('div');
         header?.appendChild(typePullDiv);
         typePullDiv.classList.add('typeDiv');
-        //typePullDiv.classList.add('fit');
         const typePull = document.createElement('select') as HTMLSelectElement;
         typePull.classList.add('responsive-text2');
         typePull.classList.add('pullDown');
         typePull.classList.add('radius10');
-        typePull.id = 'typePull';
+        typePull.classList.add(TypePullId);
+        typePull.name = TypePullId;
+        typePull.id = `Costume_${TypePullId}`
         typePull.addEventListener('change', (event: Event)=>{
             if(event.currentTarget){
                 const containerInner = document.querySelector('#containerInner');
@@ -378,14 +417,15 @@ export class Gui {
                 });
                 Gui.unLazyLoad();
                 const changeVal = (event.currentTarget as HTMLOptionElement).value;
-                if(changeVal == '1'){
-                    Gui.viewCostumesPullOption();
-                    Gui.viewCostumes();        
-                }else if(changeVal == '2'){
-                    Gui.viewBackdropsPullOption();
+                Gui.showCostumeHeaderControl(false);
+                if(changeVal == '2'){
+                    Gui.showBackdropHeaderControl(true);
+
+                    //Gui.viewBackdropsPullOption();
                     Gui.viewBackdrops();
                 }else if(changeVal == '3'){
-                    Gui.viewAudiosPullOption();
+                    Gui.showSoundHeaderControl(true);
+                    //Gui.viewAudiosPullOption();
                     Gui.viewAudios();
                 }
                 Gui.lazyLoad();
@@ -418,7 +458,9 @@ export class Gui {
         pagingPull.classList.add('responsive-text2');
         pagingPull.classList.add('pullDown');
         pagingPull.classList.add('radius10');
-        pagingPull.id = 'pagingPull';
+        pagingPull.classList.add(PagingPullId);
+        pagingPull.name = PagingPullId;
+        pagingPull.id = `Costume_${PagingPullId}`;
         {
             const option = document.createElement('option') as HTMLOptionElement;
             option.value= '1';
@@ -431,7 +473,7 @@ export class Gui {
             const changeVal = (event.currentTarget as HTMLOptionElement).value;
             const _no = changeVal;
             const _idx = parseInt(_no);
-            const _type = Gui.getTypeCounter();
+            const _type = Gui.getTypeCounter(header);
             Gui.unLazyLoad();
             if(_type == 0){
                 Gui.viewCostumes(_idx);
@@ -468,9 +510,267 @@ export class Gui {
 
 
     }
-    static getTypeCounter(): number {
-        const pagingPull = document.querySelector('#typePull') as HTMLSelectElement;
-        return pagingPull.selectedIndex;
+    static showBackdropHeaderControl(show: boolean): void {
+        const header = document.querySelector(`#${HeaderBackdropId}`);
+        const typePull = header?.querySelector(`.${TypePullId}`) as HTMLSelectElement;
+        typePull.selectedIndex = 1;
+        if(show === true){
+            header?.classList.remove('hedderHidden');
+        }else{
+            header?.classList.add('hedderHidden');
+        }
+    }
+    static addBackdropHeaderControl(): void {
+        const header = document.querySelector(`#${HeaderBackdropId}`);
+        const pageTitle = document.createElement('p') as HTMLParagraphElement;
+        pageTitle.innerHTML = `<p style="margin-left:10px;" class="responsive-text">${TITLE}</p>`;
+        header?.appendChild(pageTitle);
+        const typePullDiv = document.createElement('div');
+        header?.appendChild(typePullDiv);
+        typePullDiv.classList.add('typeDiv');
+        //typePullDiv.classList.add('fit');
+        const typePull = document.createElement('select') as HTMLSelectElement;
+        typePull.classList.add('responsive-text2');
+        typePull.classList.add('pullDown');
+        typePull.classList.add('radius10');
+        typePull.classList.add(TypePullId);
+        typePull.name = TypePullId;
+        typePull.id = `Backdrop_${TypePullId}`
+        typePull.addEventListener('change', (event: Event)=>{
+            if(event.currentTarget){
+                const containerInner = document.querySelector('#containerInner');
+                containerInner?.querySelectorAll('div').forEach(div=>{
+                    const parent = div.parentElement;
+                    if(parent && parent.id == 'containerInner')
+                        containerInner.removeChild(div);
+                });
+                Gui.unLazyLoad();
+                const changeVal = (event.currentTarget as HTMLOptionElement).value;
+                Gui.showBackdropHeaderControl(false);
+                if(changeVal == '1'){
+                    Gui.showCostumeHeaderControl(true);
+                    //Gui.viewCostumesPullOption();
+                    Gui.viewCostumes();
+                }else if(changeVal == '3'){
+                    Gui.showSoundHeaderControl(true);
+                    //Gui.viewAudiosPullOption();
+                    Gui.viewAudios();
+                }
+                Gui.lazyLoad();
+            }
+        });
+        typePullDiv.appendChild(typePull);
+        {
+            const option = document.createElement('option') as HTMLOptionElement;
+            option.value = '1';
+            option.text = 'コスチューム';
+            typePull.appendChild(option);            
+        }
+        {
+            const option = document.createElement('option') as HTMLOptionElement;
+            option.value = '2';
+            option.text = '背景';
+            typePull.appendChild(option);            
+        }
+        {
+            const option = document.createElement('option') as HTMLOptionElement;
+            option.value = '3';
+            option.text = '音';
+            typePull.appendChild(option);            
+        }
+        const pagingPullDiv = document.createElement('div');
+        header?.appendChild(pagingPullDiv);
+        pagingPullDiv.classList.add('typeDiv');
+        const pagingPull = document.createElement('select') as HTMLSelectElement;
+        pagingPullDiv.appendChild(pagingPull);
+        pagingPull.classList.add('responsive-text2');
+        pagingPull.classList.add('pullDown');
+        pagingPull.classList.add('radius10');
+        pagingPull.classList.add(PagingPullId);
+        pagingPull.name = PagingPullId;
+        pagingPull.id = `Backdrop_${PagingPullId}`;
+        {
+            const option = document.createElement('option') as HTMLOptionElement;
+            option.value= '1';
+            option.text = '0001-';
+            pagingPull.appendChild(option);
+        }
+        pagingPull.selectedIndex = 0;
+        pagingPullDiv.appendChild(pagingPull);
+        pagingPull.addEventListener('change', (event: Event)=>{
+            const changeVal = (event.currentTarget as HTMLOptionElement).value;
+            const _no = changeVal;
+            const _idx = parseInt(_no);
+            const _type = Gui.getTypeCounter(header);
+            Gui.unLazyLoad();
+            if(_type == 0){
+                Gui.viewCostumes(_idx);
+            }else if(_type == 1) {
+                Gui.viewBackdrops(_idx);
+            }else if(_type == 2) {
+                Gui.viewAudios(_idx);
+            }
+            Gui.lazyLoad();
+        });
+
+
+        const licenseDiv = document.createElement('div') as HTMLDivElement;
+        licenseDiv.classList.add('license');
+        header?.appendChild(licenseDiv);
+
+        const licenseButton = document.createElement('button') as HTMLButtonElement;
+        licenseButton.classList.add('responsive-text');
+        licenseButton.classList.add('license');
+        licenseButton.classList.add('radius10');
+        licenseButton.innerText = `${APP}`;
+        licenseDiv.appendChild(licenseButton);
+        licenseButton.addEventListener('click', ()=>{
+            const modalOverlay = document.querySelector('#modalOverlay') as HTMLDivElement;
+            if(modalOverlay)
+                modalOverlay.style.display = 'flex';
+        });
+        
+        const versionSpan = document.createElement('span') as HTMLSpanElement;
+        versionSpan.innerText = version;
+        versionSpan.classList.add('responsive-text2');
+        versionSpan.classList.add('version');
+        licenseDiv.appendChild(versionSpan);
+
+
+    }
+    static showSoundHeaderControl(show: boolean): void {
+        const header = document.querySelector(`#${HeaderSoundId}`);
+        const typePull = header?.querySelector(`.${TypePullId}`) as HTMLSelectElement;
+        typePull.selectedIndex = 2;
+        if(show === true){
+            header?.classList.remove('hedderHidden');
+        }else{
+            header?.classList.add('hedderHidden');
+        }
+    }
+    static addSoundHeaderControl(): void {
+        const header = document.querySelector(`#${HeaderSoundId}`);
+        const pageTitle = document.createElement('p') as HTMLParagraphElement;
+        pageTitle.innerHTML = `<p style="margin-left:10px;" class="responsive-text">${TITLE}</p>`;
+        header?.appendChild(pageTitle);
+        const typePullDiv = document.createElement('div');
+        header?.appendChild(typePullDiv);
+        typePullDiv.classList.add('typeDiv');
+        //typePullDiv.classList.add('fit');
+        const typePull = document.createElement('select') as HTMLSelectElement;
+        typePull.classList.add('responsive-text2');
+        typePull.classList.add('pullDown');
+        typePull.classList.add('radius10');
+        typePull.classList.add(TypePullId);
+        typePull.name = TypePullId;
+        typePull.id = `Sound_${TypePullId}`;
+        typePull.addEventListener('change', (event: Event)=>{
+            if(event.currentTarget){
+                const containerInner = document.querySelector('#containerInner');
+                containerInner?.querySelectorAll('div').forEach(div=>{
+                    const parent = div.parentElement;
+                    if(parent && parent.id == 'containerInner')
+                        containerInner.removeChild(div);
+                });
+                Gui.unLazyLoad();
+                const changeVal = (event.currentTarget as HTMLOptionElement).value;
+                Gui.showSoundHeaderControl(false);
+                if(changeVal == '1'){
+                    Gui.showCostumeHeaderControl(true);
+                    //Gui.viewCostumesPullOption();
+                    Gui.viewCostumes();        
+                }else if(changeVal == '2'){
+                    Gui.showBackdropHeaderControl(true);
+                    //Gui.viewBackdropsPullOption();
+                    Gui.viewBackdrops();
+                }
+                Gui.lazyLoad();
+            }
+        });
+        typePullDiv.appendChild(typePull);
+        {
+            const option = document.createElement('option') as HTMLOptionElement;
+            option.value = '1';
+            option.text = 'コスチューム';
+            typePull.appendChild(option);            
+        }
+        {
+            const option = document.createElement('option') as HTMLOptionElement;
+            option.value = '2';
+            option.text = '背景';
+            typePull.appendChild(option);            
+        }
+        {
+            const option = document.createElement('option') as HTMLOptionElement;
+            option.value = '3';
+            option.text = '音';
+            typePull.appendChild(option);            
+        }
+        const pagingPullDiv = document.createElement('div');
+        header?.appendChild(pagingPullDiv);
+        pagingPullDiv.classList.add('typeDiv');
+        const pagingPull = document.createElement('select') as HTMLSelectElement;
+        pagingPullDiv.appendChild(pagingPull);
+        pagingPull.classList.add('responsive-text2');
+        pagingPull.classList.add('pullDown');
+        pagingPull.classList.add('radius10');
+        pagingPull.classList.add(PagingPullId);
+        pagingPull.name = PagingPullId;
+        pagingPull.id = `Sound_${PagingPullId}`;
+        {
+            const option = document.createElement('option') as HTMLOptionElement;
+            option.value= '1';
+            option.text = '0001-';
+            pagingPull.appendChild(option);
+        }
+        pagingPull.selectedIndex = 0;
+        pagingPullDiv.appendChild(pagingPull);
+        pagingPull.addEventListener('change', (event: Event)=>{
+            const changeVal = (event.currentTarget as HTMLOptionElement).value;
+            const _no = changeVal;
+            const _idx = parseInt(_no);
+            const _type = Gui.getTypeCounter(header);
+            Gui.unLazyLoad();
+            if(_type == 0){
+                Gui.viewCostumes(_idx);
+            }else if(_type == 1) {
+                Gui.viewBackdrops(_idx);
+            }else if(_type == 2) {
+                Gui.viewAudios(_idx);
+            }
+            Gui.lazyLoad();
+        });
+
+
+        const licenseDiv = document.createElement('div') as HTMLDivElement;
+        licenseDiv.classList.add('license');
+        header?.appendChild(licenseDiv);
+
+        const licenseButton = document.createElement('button') as HTMLButtonElement;
+        licenseButton.classList.add('responsive-text');
+        licenseButton.classList.add('license');
+        licenseButton.classList.add('radius10');
+        licenseButton.innerText = `${APP}`;
+        licenseDiv.appendChild(licenseButton);
+        licenseButton.addEventListener('click', ()=>{
+            const modalOverlay = document.querySelector('#modalOverlay') as HTMLDivElement;
+            if(modalOverlay)
+                modalOverlay.style.display = 'flex';
+        });
+        
+        const versionSpan = document.createElement('span') as HTMLSpanElement;
+        versionSpan.innerText = version;
+        versionSpan.classList.add('responsive-text2');
+        versionSpan.classList.add('version');
+        licenseDiv.appendChild(versionSpan);
+    }
+
+    static getTypeCounter(header: Element|null): number {
+        if(header){
+            const pagingPull = header.querySelector(`.${TypePullId}`) as HTMLSelectElement;
+            return pagingPull.selectedIndex;
+        }
+        throw 'ERROR';
     }
     static getPagingStartCounter(): number {
         const pagingPull = document.querySelector('#pagingPull') as HTMLSelectElement;
@@ -494,9 +794,11 @@ export class Gui {
 
     }
     static viewFirst(): void {
-        const typePull = document.querySelector('#typePull') as HTMLSelectElement;
-        typePull.selectedIndex = 0; // Coustume;
-        Gui.setPullOption(costumesJson);
+        //const typePull = document.querySelector('#typePull') as HTMLSelectElement;
+        //typePull.selectedIndex = 0; // Coustume;
+        Gui.viewCostumesPullOption();
+        Gui.viewBackdropsPullOption();
+        Gui.viewAudiosPullOption();
         Gui.viewCostumes();
 
     }
@@ -505,16 +807,19 @@ export class Gui {
         Gui.viewBackdrops();   
     }
     static viewCostumesPullOption(): void {
-        Gui.setPullOption(costumesJson);
+        const header = document.querySelector(`#${HeaderCostumeId}`) as HTMLDivElement;
+        Gui.setPullOption(header, costumesJson);
     }
     static viewBackdropsPullOption(): void {
-        Gui.setPullOption(backdropsJson);
+        const header = document.querySelector(`#${HeaderBackdropId}`) as HTMLDivElement;
+        Gui.setPullOption(header, backdropsJson);
     }
     static viewAudiosPullOption(): void {
-        Gui.setPullOption(soundsJson);
+        const header = document.querySelector(`#${HeaderSoundId}`) as HTMLDivElement;
+        Gui.setPullOption(header, soundsJson);
     }
-    static setPullOption(jsons: JsonElement[]): void {
-        const pagingPull = document.querySelector('#pagingPull') as HTMLSelectElement;
+    static setPullOption(header: HTMLDivElement, jsons: JsonElement[]): void {
+        const pagingPull = header.querySelector(`.${PagingPullId}`) as HTMLSelectElement;
         pagingPull.innerHTML = pagingPull.options[0].outerHTML;
         const length = jsons.length;
         const counter = Math.floor(length / PagingNumber) + 1;
